@@ -1,12 +1,14 @@
 import routerx from 'express-promise-router'
-import UserController from '../controllers/UserController'
+import usercontroller from '../controllers/UserController'
+import auth from '../middlewares/auth'
 
 const router = routerx();
+// http://localhost:3000/api/users/register
 
-router.post("/register",UserController.register);
-router.put("/update",UserController.update);
-router.get("/list",UserController.list);
-router.post("/login",UserController.login);
-router.delete("/delete",UserController.remove);
+router.post("/register",usercontroller.register);
+router.put("/update",usercontroller.update);
+router.get("/list",auth.verifyAdmin,usercontroller.list);
+router.post("/login",usercontroller.login);
+router.delete("/delete",usercontroller.remove);
 
 export default router;
