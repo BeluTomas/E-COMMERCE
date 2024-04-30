@@ -5,11 +5,6 @@ import token from '../services/token'
 export default {
     register: async(req,res) => {
         try {
-            // rol
-            // name
-            // surname
-            // email
-            // password
             req.body.password = await bcrypt.hash(req.body.password,10);
             const user = await models.User.create(req.body);
             res.status(200).json(user);
@@ -70,7 +65,7 @@ export default {
             if(req.body.password){
                 req.body.password = await bcrypt.hash(req.body.password,10);
             }
-            const UserT = await models.User.findByIdAndUpdate({_id: req.body._id},req.body);
+            const UserT = await models.User.findByIdAndUpdate(req.body._id, req.body);
             res.status(200).json({
                 message: "EL USUARIO SE HA MODIFICADO CORRECTAMENTE",
                 user:UserT,

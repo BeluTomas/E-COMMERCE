@@ -3,7 +3,6 @@ import usercontroller from '../controllers/UserController'
 import auth from '../middlewares/auth'
 
 const router = routerx();
-// http://localhost:3000/api/users/register
 
 router.post("/register",usercontroller.register);
 router.put("/update",usercontroller.update);
