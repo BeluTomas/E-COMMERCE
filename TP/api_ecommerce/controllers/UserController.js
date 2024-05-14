@@ -54,6 +54,46 @@ export default {
             console.log(error);
         }
     },
+    login_admin: async(req,res) => {
+        try {
+            const user = await models.User.findOne({email: req.body.email,state:1,rol:"admin"});
+            if(user){
+                //SI ESTA RGISTRADO EN EL SISTEMA
+                let compare = await bcrypt.compare(req.body.password,user.password);
+                if(compare){
+                    let tokenT = await token.encode(user._id,user.rol,user.email);
+
+                    const USER_FRONTED = {
+                        token:tokenT,
+                        user: {
+                            name: user.name,
+                            email: user.email,
+                            surname: user.surname,
+                            avatar: user.avatar,
+                            rol: user.rol,
+                        },
+                    }
+
+                    res.status(200).json({
+                        USER_FRONTED:USER_FRONTED,
+                    })
+                }else{
+                    res.status(500).send({
+                        message: "EL USUARIO NO EXISTE"
+                    });
+                }
+            }else{
+                res.status(500).send({
+                    message: "EL USUARIO NO EXISTE"
+                });
+            }
+        } catch (error) {
+            res.status(500).send({
+                message: "OCURRIO UN PROBLEMA"
+            });
+            console.log(error);
+        }
+    },
     update: async(req,res) => {
         try {
             if(req.files){
