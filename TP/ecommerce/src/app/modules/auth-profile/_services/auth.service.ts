@@ -45,9 +45,9 @@ export class AuthService {
       })
     )
   }
-  localStorageSave (USER_FRONTED: any){
-  localStorage.setItem("token", USER_FRONTED.token),
-  localStorage.setItem("user", JSON.stringify(USER_FRONTED.user));
+  localStorageSave (USER_FRONTEND: any){
+  localStorage.setItem("token", USER_FRONTEND.token),
+  localStorage.setItem("user", JSON.stringify(USER_FRONTEND.user));
   return true;
 }
 registro(data:any){
