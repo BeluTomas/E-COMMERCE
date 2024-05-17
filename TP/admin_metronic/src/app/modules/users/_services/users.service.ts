@@ -23,13 +23,14 @@ export class UsersService {
   allUsers(search){
     this.isLoadingSubject.next(true);
     let headers = new HttpHeaders({'token': this.authservice.token});
-    let URL = URL_SERVICIOS + "/users/list?search"+search;
+    let URL = URL_SERVICIOS + "/users/list?search="+search;
     return this.http.get(URL,{headers:headers}).pipe(
       finalize(()=> this.isLoadingSubject.next(false))
     );
   }
 
   createUser(data){
+    this.isLoadingSubject.next(true);
     let headers = new HttpHeaders ({'token': this.authservice.token});
     let URL = URL_SERVICIOS + "/users/register_admin";
     return this.http.post(URL, data, {headers: headers}).pipe(
@@ -37,6 +38,7 @@ export class UsersService {
     );
   }
   updateUser(data){
+    this.isLoadingSubject.next(true);
     let headers = new HttpHeaders ({'token': this.authservice.token});
     let URL = URL_SERVICIOS + "/users/update";
     return this.http.put(URL, data, {headers: headers}).pipe(
@@ -45,8 +47,9 @@ export class UsersService {
   }
 
   deleteUser(user_id){
+    this.isLoadingSubject.next(true);
     let headers = new HttpHeaders ({'token': this.authservice.token});
-    let URL = URL_SERVICIOS + "/users/delete?_id"+ user_id;
+    let URL = URL_SERVICIOS + "/users/delete?_id="+ user_id;
     return this.http.delete(URL, {headers: headers}).pipe(
         finalize(()=> this.isLoadingSubject.next(false))
     );

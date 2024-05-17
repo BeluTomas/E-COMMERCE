@@ -29,10 +29,10 @@ export class DeleteUserComponent implements OnInit {
       this.UserD.emit("");
       this.toaster.open(NoticyAlertComponent,{text:`success- 'El usuario se elimino correctamente'`});
       this.modal.close;
-    }), (error) => { 
+    }, (error) => { 
       if(error.error){
         this.toaster.open(NoticyAlertComponent,{text:`danger-'${error.error.message} '`});
       }
-    }
+    })
   }
 }

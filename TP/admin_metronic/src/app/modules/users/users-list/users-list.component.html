@@ -12,30 +12,25 @@
       >
     </div>
   </div>
-  <div class="card-body">
-    <!-- begin: Filtration form -->
-    <div class="form form-label-right">
-    <div class="form-group row"> </div> 
+<div class="card-body">
+  <!-- begin: Filtration form -->
+  <div class="form form-label-right">
+    <div class="form-group row">
+      <div class="col-lg-12 d-flex align-items-center">
+        <div class="flex-grow-1 mr-2">
+          <input type="text" class="form-control" name="searchText" placeholder="Buscar" value="" [(ngModel)]="search"
+            (keyup.enter)="allUsers()" />
+          <small class="form-text text-muted">
+            <b>Buscar</b> por correo, nombre y apellido
+          </small>
         </div>
-        <div class="col-lg-3">
-          <input
-            type="text"
-            class="form-control"
-            name="searchText"
-            placeholder="Buscar"
-            value=""
-            [(ngModel)]="search"
-            (keyup.enter)="allUsers()"
-          /><small class="form-text text-muted"
-            ><b>Buscar</b> por correo, nombre y apellido</small
-          >
+        <div class="d-flex align-items-center">
+          <button class="btn btn-primary mr-2" (click)="allUsers()">Buscar</button>
+          <button class="btn btn-dark" (click)="refresh()">Refresh</button>
         </div>
-        <div class="col-2">
-          <button class="btn btn-dark" (click)="refresh()"> Refresh </button>
-        </div>
-      </div> 
-
+      </div>
     </div>
+  </div>
      <ng-container *ngIf="isLoading$ | async">
         <span class="spinner spinner-primary ml-5"></span>
     </ng-container> 

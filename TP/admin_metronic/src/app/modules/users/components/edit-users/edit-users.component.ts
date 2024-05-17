@@ -31,7 +31,7 @@ export class EditUsersComponent implements OnInit {
     this.email = this.user_selected.email;
   }
   save(){
-    if(!this.name || this.surname || this.email ){
+    if(!this.name || !this.surname || !this.email ){
       //TODOS LOS CAMPOS SON OBLIGATORIOS
       this.toaster.open(NoticyAlertComponent,{text:`danger- 'Ups! necesitas agregar todos los campos.'`});
       return;
@@ -53,11 +53,11 @@ export class EditUsersComponent implements OnInit {
       this.UserE.emit(resp.user);
       this.toaster.open(NoticyAlertComponent,{text:`success- 'El usuario se actualizo correctamente'`});
       this.modal.close;
-    }), (error) => { 
+    }, (error) => { 
       if(error.error){
         this.toaster.open(NoticyAlertComponent,{text:`danger-'${error.error.message} '`});
       }
-    }
+    })
   }
 
 }

@@ -27,7 +27,7 @@ export class AddUsersComponent implements OnInit {
   ngOnInit(): void {
   }
   save(){
-    if(!this.name || this.surname || this.email || this.password || this.repeat_password){
+    if(!this.name || !this.surname || !this.email || !this.password || !this.repeat_password){
       //TODOS LOS CAMPOS SON OBLIGATORIOS
       this.toaster.open(NoticyAlertComponent,{text:`danger- 'Ups! necesitas agregar todos los campos.'`});
       return;
@@ -48,10 +48,10 @@ export class AddUsersComponent implements OnInit {
       this.UserC.emit(resp.user);
       this.toaster.open(NoticyAlertComponent,{text:`success- 'El usuario se registro correctamente'`});
       this.modal.close;
-    }), (error) => { 
+    }, (error) => { 
       if(error.error){
         this.toaster.open(NoticyAlertComponent,{text:`danger-'${error.error.message} '`});
       }
-    }
+    })
   }
 }

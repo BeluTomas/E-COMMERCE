@@ -23,7 +23,7 @@ export class AuthGuard implements CanActivate {
     let token = this.authService.token;
 
     let expiration = (JSON.parse(atob(token.split('.')[1]))).exp;
-    if(Math.floor((new Date).getTime()/100) >= expiration){
+    if(Math.floor((new Date).getTime()/1000) >= expiration){
       this.authService.logout();
       return false
     }
