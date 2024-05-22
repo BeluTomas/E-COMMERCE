@@ -26,7 +26,7 @@ Esta plataforma de comercio electrónico se especializa en la venta de prendas d
 |:-|:-|
 |CRUD |1. CRUD Usuario<br>2. CRUD Categoría<br>3. CRUD Producto<br>4. CRUD Cupon<br>5. CRUD Descuento|
 |CRUD simple|1. CRUD Categoría<br> 2. CRUD Usuario<br>3. CRUD Cupon<br>4. CRUD Descuento|
-|CRUD dependiente|1. CRUD Producto {depende de} CRUD Categoría|
+|CRUD dependiente|1. CRUD Producto {depende de} CRUD Categoría <br>2. CRUD Variedad {depende de} CRUD Producto|
 |Listado<br>+<br>detalle| 1. Listado de productos filtrados por categoría.<br> 2. Listado de usuarios filtrados por nombre y apellido|
 |CUU/Epic|CUU01. Hacer pedido<br>CUU02. Registrar reseña<br>CUU03. Envio de email despues del pago|
 ### Modelo
