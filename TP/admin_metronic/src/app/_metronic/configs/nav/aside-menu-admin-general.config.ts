@@ -33,7 +33,7 @@ export const AsideMenuAdminGeneral = {
         name: "categorias",
         bullet: 'dot',
         icon: 'flaticon2-user-outline-symbol',
-        svg: './assets/media/svg/icons/Home/Comode2.svg',
+        svg: './assets/media/svg/icons/Home/Commode2.svg',
         page: '/categorias',
         submenu: [
           {

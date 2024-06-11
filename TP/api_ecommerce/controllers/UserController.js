@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs'
 import models from '../models'
 import token from '../services/token'
-import resources from '../resources'
+import resource from '../resources'
 
 export default {
     register: async(req,res) => {
@@ -19,16 +19,16 @@ export default {
     register_admin: async(req,res) => {
         try {
             const userV = await models.User.findOne({email: req.body.email});
-            if (userV) {
+            if(userV){
                 res.status(500).send({
-                    message:"El usuario ya existe"
+                    message: "EL USUARIO YA EXISTE"
                 });
             }
             req.body.rol = "admin";
             req.body.password = await bcrypt.hash(req.body.password,10);
             let user = await models.User.create(req.body);
             res.status(200).json({
-                user:resources.User.user_list(user)
+                user: resource.User.user_list(user)
             });
         } catch (error) {
             res.status(500).send({
@@ -46,7 +46,7 @@ export default {
                 if(compare){
                     let tokenT = await token.encode(user._id,user.rol,user.email);
 
-                    const USER_FRONTEND = {
+                    const USER_FRONTED = {
                         token:tokenT,
                         user: {
                             name: user.name,
@@ -57,7 +57,7 @@ export default {
                     }
 
                     res.status(200).json({
-                        USER_FRONTEND:USER_FRONTEND,
+                        USER_FRONTED:USER_FRONTED,
                     })
                 }else{
                     res.status(500).send({
@@ -78,14 +78,14 @@ export default {
     },
     login_admin: async(req,res) => {
         try {
-            const user = await models.User.findOne({email: req.body.email,state:1,rol:"admin"});
+            const user = await models.User.findOne({email: req.body.email,state:1,rol: "admin"});
             if(user){
                 //SI ESTA RGISTRADO EN EL SISTEMA
                 let compare = await bcrypt.compare(req.body.password,user.password);
                 if(compare){
                     let tokenT = await token.encode(user._id,user.rol,user.email);
 
-                    const USER_FRONTEND = {
+                    const USER_FRONTED = {
                         token:tokenT,
                         user: {
                             name: user.name,
@@ -97,7 +97,7 @@ export default {
                     }
 
                     res.status(200).json({
-                        USER_FRONTEND:USER_FRONTEND,
+                        USER_FRONTED:USER_FRONTED,
                     })
                 }else{
                     res.status(500).send({
@@ -127,11 +127,12 @@ export default {
             if(req.body.password){
                 req.body.password = await bcrypt.hash(req.body.password,10);
             }
-            await models.User.findByIdAndUpdate({_id: req.body._id}, req.body);
+            await models.User.findByIdAndUpdate({_id: req.body._id},req.body);
+
             let UserT = await models.User.findOne({_id: req.body._id});
             res.status(200).json({
                 message: "EL USUARIO SE HA MODIFICADO CORRECTAMENTE",
-                user: resources.User.user_list(UserT),
+                user: resource.User.user_list(UserT),
             });
         } catch (error) {
             res.status(500).send({
@@ -150,8 +151,9 @@ export default {
                     {"email": new RegExp(search, "i")},
                 ]
             }).sort({'createdAt': -1});
-            Users= Users.map ((user)=>{
-                return resources.User.user_list(user);
+
+            Users = Users.map((user) => {
+                return resource.User.user_list(user);
             })
 
             res.status(200).json({
@@ -169,7 +171,6 @@ export default {
             const User = await models.User.findByIdAndDelete({_id: req.query._id});
             res.status(200).json({
                 message: "EL USUARIO SE ELIMINO CORRECTAMENTE",
-
             });
         } catch (error) {
             res.status(500).send({

@@ -1,9 +1,9 @@
 import mongoose,{Schema} from "mongoose";
 
 const CategorieSchema = new Schema({
-  tittle: {type:String, maxlenght: 250, required: true},
-  imagen: {type:String, maxlenght: 250, required: true},
-  state:{type:Number, maxlenght:2, default:1},
+    title:{type:String,maxlength : 250,required:true},
+    imagen:{type:String,maxlength: 250, required:true},
+    state:{type:Number,maxlength:2,default:1},
 },{
     timestamps: true
 });

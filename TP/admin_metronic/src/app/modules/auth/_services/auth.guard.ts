@@ -1,33 +1,28 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import {
+  Router,
+  CanActivate,
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+} from '@angular/router';
 import { AuthService } from './auth.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
+  constructor(private authService: AuthService, public router: Router) {}
 
-  constructor(
-    public authService:AuthService,
-    public router: Router,
-  ) {}
-
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if(!this.authService.user || !this.authService.token){
-      this.router.navigate(["auth/login"]);
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    if(!this.authService.isLogued()){
+      this.router.navigate(["/auth/login"]);
       return false;
     }
     let token = this.authService.token;
-
-    let expiration = (JSON.parse(atob(token.split('.')[1]))).exp;
-    if(Math.floor((new Date).getTime()/1000) >= expiration){
+    let expirado = (JSON.parse(atob(token!.split('.')[1]))).exp;
+    if((Math.floor((new Date).getTime() / 1000)) >= expirado){
       this.authService.logout();
-      return false
-    }
+      return false;
+    }else{
       return true;
+    }
   }
-  
 }

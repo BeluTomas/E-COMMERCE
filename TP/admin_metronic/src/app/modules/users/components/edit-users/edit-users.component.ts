@@ -12,13 +12,13 @@ import { UsersService } from '../../_services/users.service';
 export class EditUsersComponent implements OnInit {
 
   @Input() user_selected:any;
-  @Output() UserE:EventEmitter<any> = new EventEmitter();
+
+  @Output() UserE: EventEmitter<any> = new EventEmitter();
   name:any = null;
-  surname: any = null;
+  surname:any = null;
   email:any = null;
   password:any = null;
-  repeat_password:any = null;
-
+  repet_password:any = null;
   constructor(
     public modal: NgbActiveModal,
     public userService: UsersService,
@@ -26,36 +26,37 @@ export class EditUsersComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.name  =  this.user_selected.name;
+    this.name = this.user_selected.name;
     this.surname = this.user_selected.surname;
     this.email = this.user_selected.email;
   }
+
   save(){
-    if(!this.name || !this.surname || !this.email ){
-      //TODOS LOS CAMPOS SON OBLIGATORIOS
-      this.toaster.open(NoticyAlertComponent,{text:`danger- 'Ups! necesitas agregar todos los campos.'`});
+    if(!this.name || !this.surname || !this.email){
+      // TODOS LO CAMPOS SON OBLIGATORIOS
+      this.toaster.open(NoticyAlertComponent,{text:`danger-'Upps! Necesita ingresar todos los campos.'`});
       return;
     }
-    if (this.password != this.repeat_password){
-      this.toaster.open(NoticyAlertComponent,{text: `danger- 'Ups! necesitas ingresar contraseñas iguales.'`});
-      return;
-    }
+    // if(this.password != this.repet_password){
+    //   this.toaster.open(NoticyAlertComponent,{text:`danger-'Upps! Necesita ingresar contraseñas iguales.'`});
+    //   return;
+    // }
     let data = {
       _id: this.user_selected._id,
       name: this.name,
       surname: this.surname,
-      email:this.email,
-      password:this.password,
-      repeat_password: this.repeat_password,
+      email: this.email,
+      password: this.password,
+      repet_password: this.repet_password,
     }
-    this.userService.updateUser(data).subscribe((resp:any)=> {
+    this.userService.updateUser(data).subscribe((resp:any) => {
       console.log(resp);
       this.UserE.emit(resp.user);
-      this.toaster.open(NoticyAlertComponent,{text:`success- 'El usuario se actualizo correctamente'`});
-      this.modal.close;
-    }, (error) => { 
+      this.toaster.open(NoticyAlertComponent,{text:`success-'EL USUARIO SE ACTUALIZO CORRECTAMENTE.'`});
+      this.modal.close();
+    }, (error) => {
       if(error.error){
-        this.toaster.open(NoticyAlertComponent,{text:`danger-'${error.error.message} '`});
+        this.toaster.open(NoticyAlertComponent,{text:`danger-'${error.error.message}'`});
       }
     })
   }

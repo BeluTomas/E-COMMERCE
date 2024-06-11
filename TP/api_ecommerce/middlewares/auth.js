@@ -1,4 +1,4 @@
-import token from '../services/token';
+import token from '../services/token'
 
 export default {
     verifyEcommerce: async(req,res,next) => {

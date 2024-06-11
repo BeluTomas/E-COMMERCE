@@ -67,7 +67,7 @@ const routes: Routes = [
             (m) => m.UsersModule
           ),
       },
-        {
+      {
         path: 'categorias',
         loadChildren: () =>
           import('../modules/categories/categories.module').then(

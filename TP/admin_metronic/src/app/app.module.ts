@@ -17,7 +17,7 @@ import { SplashScreenModule } from './_metronic/partials/layout/splash-screen/sp
 // #fake-start#
 import { FakeAPIService } from './_fake/fake-api.service';
 import { NoticyAlertComponent } from './componets/notifications/noticy-alert/noticy-alert.component';
-import { ToastNotificationsModule, Toaster } from 'ngx-toast-notifications';
+import { ToastNotificationsModule } from 'ngx-toast-notifications';
 // #fake-end#
 
 function appInitializer(authService: AuthService) {
@@ -50,7 +50,7 @@ function appInitializer(authService: AuthService) {
     AppRoutingModule,
     InlineSVGModule.forRoot(),
     NgbModule,
-    ToastNotificationsModule.forRoot({duration: 5000,position: 'top-right'}),
+    ToastNotificationsModule.forRoot({duration: 5000, position: 'top-right'})
   ],
   providers: [
     // {

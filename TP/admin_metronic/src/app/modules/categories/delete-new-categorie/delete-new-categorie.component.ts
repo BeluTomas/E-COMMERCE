@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Toaster } from 'ngx-toast-notifications';
+import { NoticyAlertComponent } from 'src/app/componets/notifications/noticy-alert/noticy-alert.component';
+import { CategoriesService } from '../_services/categories.service';
 
 @Component({
   selector: 'app-delete-new-categorie',
@@ -7,9 +11,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DeleteNewCategorieComponent implements OnInit {
 
-  constructor() { }
+  @Output() CategorieD: EventEmitter<any> = new EventEmitter();
+  @Input() categorie_selected:any;
+
+  constructor(
+    public modal: NgbActiveModal,
+    public categorieService: CategoriesService,
+    public toaster: Toaster,
+  ) { }
 
   ngOnInit(): void {
+  }
+
+
+  delete(){
+    this.categorieService.deleteCategorie(this.categorie_selected._id).subscribe((resp:any) => {
+      console.log(resp);
+      this.CategorieD.emit("");
+      this.toaster.open(NoticyAlertComponent,{text:`success-'LA CATEGORIA  SE ELIMINO CORRECTAMENTE.'`});
+      this.modal.close();
+    }, (error) => {
+      if(error.error){
+        this.toaster.open(NoticyAlertComponent,{text:`danger-'${error.error.message}'`});
+      }
+    })
   }
 
 }
