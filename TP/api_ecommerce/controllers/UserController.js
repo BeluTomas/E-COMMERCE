@@ -6,6 +6,11 @@ import resource from '../resources'
 export default {
     register: async(req,res) => {
         try {
+            // rol
+            // name
+            // surname
+            // email
+            // password
             req.body.password = await bcrypt.hash(req.body.password,10);
             const user = await models.User.create(req.body);
             res.status(200).json(user);
@@ -18,6 +23,11 @@ export default {
     },
     register_admin: async(req,res) => {
         try {
+            // rol
+            // name
+            // surname
+            // email
+            // password
             const userV = await models.User.findOne({email: req.body.email});
             if(userV){
                 res.status(500).send({

@@ -9,6 +9,7 @@ export default {
                 var img_path = req.files.portada.path;
                 var name = img_path.split('\\');
                 var portada_name = name[2];
+                // console.log(portada_name)
                 req.body.imagen = portada_name;
             }
             const categorie = await models.Categorie.create(req.body);
@@ -26,6 +27,7 @@ export default {
                 var img_path = req.files.portada.path;
                 var name = img_path.split('\\');
                 var portada_name = name[2];
+                // console.log(portada_name)
                 req.body.imagen = portada_name;
             }
             await models.Categorie.findByIdAndUpdate({_id: req.body._id},req.body);
