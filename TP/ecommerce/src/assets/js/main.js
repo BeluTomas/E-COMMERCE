@@ -30,7 +30,7 @@ function HOMEINITTEMPLATE($, undefined) {
           axilInit.countdownInit('.coming-countdown', '2022/10/01');
           axilInit.campaignCountdown('.campaign-countdown', '2022/10/01');
           axilInit.countdownInit('.poster-countdown', '2022/10/01');
-          axilInit.countdownInit('.sale-countdown', '2022/10/31');
+        //   axilInit.countdownInit('.sale-countdown', '2023/10/31');
           axilInit.sideOffcanvasToggle('.cart-dropdown-btn', '#cart-dropdown');
           axilInit.sideOffcanvasToggle('.mobile-nav-toggler', '.header-main-nav');
           axilInit.sideOffcanvasToggle('.department-side-menu', '.department-nav-menu');
@@ -990,4 +990,75 @@ function HOMEINITTEMPLATE($, undefined) {
   }
   axilInit.i();
 
+}
+
+
+function ModalProductDetail(){
+    $('.product-large-thumbnail').slick({
+        infinite: false,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: false,
+        dots: false,
+        speed: 800,
+        draggable: false,
+        asNavFor: '.product-small-thumb'
+      });
+
+        $('.product-small-thumb').slick({
+          infinite: false,
+          slidesToShow: 6,
+          slidesToScroll: 1,
+          arrows: false,
+          dots: false,
+          focusOnSelect: true,
+          vertical: true,
+          speed: 800,
+          asNavFor: '.product-large-thumbnail',
+          responsive: [{
+                  breakpoint: 992,
+                  settings: {
+                      vertical: false,
+                  }
+              },
+              {
+                  breakpoint: 768,
+                  settings: {
+                      vertical: false,
+                      slidesToShow: 4,
+                  }
+              }
+          ]
+
+      });
+
+        if ($('.zoom-gallery').length) {
+          $('.zoom-gallery').each(function() {
+            $('.zoom-gallery').magnificPopup({
+                  delegate: 'a.popup-zoom',
+                  type: 'image',
+                  gallery: {
+                      enabled: true
+                  }
+              });
+          });
+      }
+
+      $('.pro-qty').prepend('<span class="dec qtybtn">-</span>');
+      $('.pro-qty').append('<span class="inc qtybtn">+</span>');
+      $('.qtybtn').on('click', function() {
+          var $button = $(this);
+          var oldValue = $button.parent().find('input').val();
+          if ($button.hasClass('inc')) {
+              var newVal = parseFloat(oldValue) + 1;
+          } else {
+              // Don't allow decrementing below zero
+              if (oldValue > 0) {
+                  var newVal = parseFloat(oldValue) - 1;
+              } else {
+                  newVal = 0;
+              }
+          }
+          $button.parent().find('input').val(newVal);
+      });
 }

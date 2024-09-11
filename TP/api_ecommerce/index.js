@@ -7,7 +7,7 @@ import router from './router'
 //CONEXION A LA BASE DE DATOS
 
 mongoose.Promise = global.Promise;
-const dbUrL = "mongodb://127.0.0.1:27017/ecommerce";
+const dbUrL = "mongodb://localhost:27017/ecommerce_udemy";
 mongoose.connect(
     dbUrL , {
         useNewUrlParser:  true,

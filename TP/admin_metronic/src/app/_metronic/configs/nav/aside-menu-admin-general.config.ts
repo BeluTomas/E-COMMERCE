@@ -61,5 +61,58 @@ export const AsideMenuAdminGeneral = {
           },
         ]
       },
+      {
+        title: 'Sliders',
+        root: true,
+        name: "sliders",
+        bullet: 'dot',
+        icon: 'flaticon2-user-outline-symbol',
+        svg: './assets/media/svg/icons/Design/Image.svg',
+        page: '/sliders',
+        submenu: [
+          {
+            title: 'Lista Sliders',
+            page: '/sliders/lista-sliders'
+          }
+        ]
+      },
+      {
+        title: 'Cupones',
+        root: true,
+        name: "cupones",
+        bullet: 'dot',
+        icon: 'flaticon2-user-outline-symbol',
+        svg: './assets/media/svg/icons/Devices/Cardboard-vr.svg',
+        page: '/cupones',
+        submenu: [
+          {
+            title: 'Registrar Cupon',
+            page: '/cupones/registrar-cupon'
+          },
+          {
+            title: 'Lista Cupones',
+            page: '/cupones/listar-cupones'
+          }
+        ]
+      },
+      {
+        title: 'Descuento',
+        root: true,
+        name: "descuento",
+        bullet: 'dot',
+        icon: 'flaticon2-user-outline-symbol',
+        svg: './assets/media/svg/icons/General/Clipboard.svg',
+        page: '/descuento',
+        submenu: [
+          {
+            title: 'Registrar Descuento',
+            page: '/descuento/registrar-descuento'
+          },
+          {
+            title: 'Lista Descuentos',
+            page: '/descuento/listar-descuento'
+          }
+        ]
+      },
     ]
 }

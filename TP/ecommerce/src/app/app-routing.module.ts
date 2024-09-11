@@ -5,25 +5,25 @@ import { RouterModule, Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
-    loadChildren: ()  => import("./modules/home/home.module").then(m => m.HomeModule),
+    loadChildren: () => import("./modules/home/home.module").then(m => m.HomeModule),
   },
   {
     path: 'auth',
-    loadChildren: ()  => import("./modules/auth-profile/auth-profile.module").then(m => m.AuthProfileModule),
+    loadChildren: () => import("./modules/auth-profile/auth-profile.module").then(m => m.AuthProfileModule),
   },
   {
     path: '',
-    redirectTo:'/',
+    redirectTo: '/',
     pathMatch: 'full',
   },
   {
-    path:'**',
+    path: '**',
     redirectTo: 'error/404',
   }
 ]
 
 @NgModule({
-  // declarations:[],
+  // declarations: [],
   imports: [
     RouterModule.forRoot(routes)
   ],

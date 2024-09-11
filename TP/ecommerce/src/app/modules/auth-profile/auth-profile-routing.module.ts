@@ -3,18 +3,20 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthProfileComponent } from './auth-profile.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { AuthGuard } from './_services/auth.guard';
 
 const routes: Routes = [
   {
-    path:'',
+    path: '',
     component: AuthProfileComponent,
     children: [
       {
-        path:'login',
+        path: 'login',
         component: LoginComponent
       },
       {
-        path:'registro',
+        path: 'registro',
+        // canActivate: [AuthGuard],
         component: RegisterComponent
       }
     ]
