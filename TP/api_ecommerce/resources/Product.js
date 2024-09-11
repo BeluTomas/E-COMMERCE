@@ -14,7 +14,7 @@ export default {
             slug: product.slug,
             imagen: 'http://localhost:3000'+'/api/products/uploads/product/'+product.portada,//*
             categorie: product.categorie,
-            price_soles: product.price_soles,
+            price_pesos: product.price_pesos,
             price_usd: product.price_usd,
             stock: product.stock,
             description: product.description,

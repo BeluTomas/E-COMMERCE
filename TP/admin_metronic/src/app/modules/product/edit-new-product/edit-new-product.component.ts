@@ -23,7 +23,7 @@ export class EditNewProductComponent implements OnInit {
   sku:any = null;
   categories:any = [];
   categorie:any = "";
-  price_soles:any = 0;  
+  price_pesos:any = 0;  
   price_usd:any = 0;  
   imagen_file:any= null;
   imagen_previzualizacion:any = null;
@@ -69,7 +69,7 @@ export class EditNewProductComponent implements OnInit {
       this.title = this.product_selected.title;
       this.sku = this.product_selected.sku;
       this.categorie = this.product_selected.categorie._id;
-      this.price_soles = this.product_selected.price_soles;
+      this.price_pesos = this.product_selected.price_pesos;
       this.price_usd = this.product_selected.price_usd;
       
       this.stock = this.product_selected.stock;
@@ -133,7 +133,7 @@ export class EditNewProductComponent implements OnInit {
   }
 
   update(){
-    if(!this.title || !this.categorie || !this.price_soles || !this.price_usd || !this.resumen || !this.description
+    if(!this.title || !this.categorie || !this.price_pesos || !this.price_usd || !this.resumen || !this.description
       || !this.sku || this.tags.length == 0){
         this.toaster.open(NoticyAlertComponent,{text:`danger-'Upps! NECESITAS DIGITAR TODOS LOS CAMPOS DEL FORMULARIO.'`});
         return;
@@ -143,7 +143,7 @@ export class EditNewProductComponent implements OnInit {
     formData.append("title",this.title);
     formData.append("categorie",this.categorie);
     formData.append("sku",this.sku);
-    formData.append("price_soles",this.price_soles);
+    formData.append("price_pesos",this.price_pesos);
     formData.append("price_usd",this.price_usd);
     formData.append("description",this.description);
     formData.append("resumen",this.resumen);
