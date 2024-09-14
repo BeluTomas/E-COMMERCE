@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  URL_BACKEND: 'api.dominio.com/',
-  URL_SERVICIOS: 'api.dominio.com/api/',
-  URL_FRONTED: 'ecommerce.dominio.com',
+  URL_BACKEND: 'http://api.cursos-udemy.site/',
+  URL_SERVICIOS: 'http://api.cursos-udemy.site/api/',
+  URL_FRONTED: 'http://tienda.cursos-udemy.site',
 };

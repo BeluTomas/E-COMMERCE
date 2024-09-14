@@ -72,7 +72,7 @@
         <!-- End Slider Area -->
 
         <!-- Start Flash Sale Area  -->
-        <div class="axil-new-arrivals-product-area fullwidth-container flash-sale-area bg-color-white axil-section-gap pb--0">
+        <div class="axil-new-arrivals-product-area fullwidth-container flash-sale-area bg-color-white axil-section-gap pb--0" *ngIf="FlashSale">
             <div class="container ml--xxl-0">
                 <div class="product-area pb--50">
                     <div class="d-md-flex align-items-end flash-sale-section">
@@ -88,29 +88,29 @@
                             <div class="slick-single-layout">
                                 <div class="axil-product product-style-four">
                                     <div class="thumbnail">
-                                        <a href="single-product.html">
+                                        <a [routerLink]="[ '/landing-producto/', product.slug ]" [queryParams]="{_id: FlashSale._id}">
                                             <img data-sal="zoom-out" style="width: 255px;height: 255px;object-fit: cover;" data-sal-delay="100" data-sal-duration="1500" [src]="product.imagen" alt="Product Images">
                                         </a>
                                         <div class="label-block label-right" *ngIf="FlashSale.type_discount == 1">
                                             <div class="product-badget">{{ FlashSale.discount }}% OFF</div>
                                         </div>
                                         <div class="label-block label-right" *ngIf="FlashSale.type_discount == 2">
-                                            <div class="product-badget">{{ FlashSale.discount }} PEN OFF</div>
+                                            <div class="product-badget">{{ FlashSale.discount }} USD OFF</div>
                                         </div>
                                         <div class="product-hover-action">
                                             <ul class="cart-action">
                                                 <li class="wishlist"><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
-                                                <li class="select-option"><a href="cart.html">Add to Cart</a></li>
+                                                <li class="select-option"><a href="#" onclick="return false;" (click)="addCart(product,1)">Add to Cart</a></li>
                                                 <li class="quickview"><a href="#" data-bs-toggle="modal" data-bs-target="#quick-view-modal" (click)="OpenModal(product,FlashSale)"><i class="far fa-eye"></i></a></li>
                                             </ul>
                                         </div>
                                     </div>
                                     <div class="product-content">
                                         <div class="inner">
-                                            <h5 class="title"><a href="single-product.html">{{ product.title }}</a></h5>
+                                            <h5 class="title"><a [routerLink]="[ '/landing-producto/', product.slug ]" [queryParams]="{_id: FlashSale._id}">{{ product.title }}</a></h5>
                                             <div class="product-price-variant">
-                                                <span class="price old-price">{{ product.price_pesos }} PEN</span>
-                                                <span class="price current-price">{{ getCalNewPrice(product) }} PEN</span>
+                                                <span class="price old-price">{{ product.price_usd }} USD</span>
+                                                <span class="price current-price">{{ getCalNewPrice(product) }} USD</span>
                                             </div>
                                         </div>
                                     </div>
@@ -165,33 +165,38 @@
                             <div class="slick-single-layout">
                                 <div class="axil-product product-style-three">
                                     <div class="thumbnail">
-                                        <a href="single-product.html">
+                                        <a [routerLink]="[ '/landing-producto/', bestProd.slug ]" [queryParams]="getRouterDiscount(bestProd)">
                                             <img data-sal="fade" style="width: 255px;height: 255px;object-fit: cover;" data-sal-delay="100" data-sal-duration="1500" [src]="bestProd.imagen" alt="Product Images">
                                         </a>
                                         <div class="product-hover-action">
                                             <ul class="cart-action">
                                                 <li class="wishlist"><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
-                                                <li class="select-option"><a href="cart.html">Add to Cart</a></li>
+                                                <li class="select-option"><a href="#" onclick="return false;" (click)="addCart(bestProd)">Add to Cart</a></li>
                                                 <li class="quickview"><a href="#" data-bs-toggle="modal" data-bs-target="#quick-view-modal" (click)="OpenModal(bestProd)"><i class="far fa-eye"></i></a></li>
                                             </ul>
+                                        </div>
+                                        <div class="label-block label-right" *ngIf="bestProd.campaing_discount">
+                                            <div class="product-badget" *ngIf="bestProd.campaing_discount.type_discount == 1">{{ bestProd.campaing_discount.discount }}% Off</div>
+                                            <div class="product-badget" *ngIf="bestProd.campaing_discount.type_discount == 2">-{{ bestProd.campaing_discount.discount }}USD Off</div>
                                         </div>
                                     </div>
                                     <div class="product-content">
                                         <div class="inner">
                                             <div class="product-rating">
                                                 <span class="icon">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star" [ngClass]="{'start-del': bestProd.avg_review < 1}"></i>
+                                            <i class="fas fa-star" [ngClass]="{'start-del': bestProd.avg_review < 2}"></i>
+                                            <i class="fas fa-star" [ngClass]="{'start-del': bestProd.avg_review < 3}"></i>
+                                            <i class="fas fa-star" [ngClass]="{'start-del': bestProd.avg_review < 4}"></i>
+                                            <i class="fas fa-star" [ngClass]="{'start-del': bestProd.avg_review < 5}"></i>
                                         </span>
-                                                <span class="rating-number">(18)</span>
+                                        
+                                                <span class="rating-number">({{ bestProd.count_review }})</span>
                                             </div>
-                                            <h5 class="title"><a href="single-product.html">{{ bestProd.title }}</a></h5>
+                                            <h5 class="title"><a [routerLink]="[ '/landing-producto/', bestProd.slug ]" [queryParams]="getRouterDiscount(bestProd)">{{ bestProd.title }}</a></h5>
                                             <div class="product-price-variant">
-                                                <span class="price current-price">{{ bestProd.price_pesos }} PEN</span>
-                                                <!-- <span class="price old-price">$50</span> -->
+                                                <span class="price old-price" *ngIf="bestProd.campaing_discount">{{ bestProd.price_usd }} USD</span>
+                                                <span class="price current-price">{{ bestProd.price_usd - getDiscountProduct(bestProd) }} USD</span>
                                             </div>
                                         </div>
                                     </div>
@@ -254,18 +259,19 @@
                                 <div class="col-xl-3 col-lg-4 col-sm-6 col-12 mb--30">
                                     <div class="axil-product product-style-one">
                                         <div class="thumbnail">
-                                            <a href="single-product.html">
+                                            <a [routerLink]="[ '/landing-producto/', our_product.slug ]">
                                                 <img data-sal="zoom-out" style="width: 255px;height: 255px;object-fit: cover" data-sal-delay="200" data-sal-duration="800" class="main-img" [src]="our_product.imagen" alt="Product Images">
                                                 <img class="hover-img" style="width: 255px;height: 255px;object-fit: cover" [src]="our_product.imagen_two" alt="Product Images">
                                             </a>
-                                            <!-- <div class="label-block label-right">
-                                                <div class="product-badget">20% Off</div>
-                                            </div> -->
+                                            <div class="label-block label-right" *ngIf="our_product.campaing_discount">
+                                                <div class="product-badget" *ngIf="our_product.campaing_discount.type_discount == 1">{{ our_product.campaing_discount.discount }}% Off</div>
+                                                <div class="product-badget" *ngIf="our_product.campaing_discount.type_discount == 2">-{{ our_product.campaing_discount.discount }}USD Off</div>
+                                            </div>
                                             <div class="product-hover-action">
                                                 <ul class="cart-action">
                                                     <li class="quickview"><a href="#" data-bs-toggle="modal" data-bs-target="#quick-view-modal" (click)="OpenModal(our_product)"><i class="far fa-eye"></i></a></li>
                                                     <li class="select-option">
-                                                        <a href="single-product.html">
+                                                        <a href="#" onclick="return false;" (click)="addCart(our_product)">
                                                             Add to Cart
                                                         </a>
                                                     </li>
@@ -277,17 +283,20 @@
                                             <div class="inner">
                                                 <div class="product-rating">
                                                     <span class="icon">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star" [ngClass]="{'start-del': our_product.avg_review < 1}"></i>
+                                                <i class="fas fa-star" [ngClass]="{'start-del': our_product.avg_review < 2}"></i>
+                                                <i class="fas fa-star" [ngClass]="{'start-del': our_product.avg_review < 3}"></i>
+                                                <i class="fas fa-star" [ngClass]="{'start-del': our_product.avg_review < 4}"></i>
+                                                <i class="fas fa-star" [ngClass]="{'start-del': our_product.avg_review < 5}"></i>
                                             </span>
-                                                    <span class="rating-number">(64)</span>
+                                            
+                                                    <span class="rating-number">({{ our_product.count_review }})</span>
                                                 </div>
-                                                <h5 class="title"><a href="single-product.html">{{ our_product.title }}</a></h5>
+                                                <h5 class="title"><a [routerLink]="[ '/landing-producto/', our_product.slug ]">{{ our_product.title }}</a></h5>
                                                 <div class="product-price-variant">
-                                                    <span class="price current-price">{{ our_product.price_pesos }} PEN</span>
+                                                    <span class="price old-price" *ngIf="our_product.campaing_discount">{{ our_product.price_usd }} USD</span>
+                                                    <span class="price current-price">{{ our_product.price_usd - getDiscountProduct(our_product) }} USD</span>
+                                                    <!-- <span class="price current-price">{{ our_product.price_usd }} USD</span> -->
                                                     <!-- <span class="price old-price">$49.99</span> -->
                                                 </div>
                                             </div>
@@ -305,7 +314,7 @@
                                 <div class="col-xl-3 col-lg-4 col-sm-6 col-12 mb--30">
                                     <div class="axil-product product-style-one">
                                         <div class="thumbnail">
-                                            <a href="single-product.html">
+                                            <a [routerLink]="[ '/landing-producto/', best_product.slug ]">
                                                 <img data-sal="zoom-out" style="width: 255px;height: 255px;object-fit: cover;" data-sal-delay="200" data-sal-duration="800" class="main-img" [src]="best_product.imagen" alt="Product Images">
                                                 <img class="hover-img" style="width: 255px;height: 255px;object-fit: cover;" [src]="best_product.imagen_two" alt="Product Images">
                                             </a>
@@ -316,7 +325,7 @@
                                                 <ul class="cart-action">
                                                     <li class="quickview"><a href="#" data-bs-toggle="modal" data-bs-target="#quick-view-modal" (click)="OpenModal(best_product)"><i class="far fa-eye"></i></a></li>
                                                     <li class="select-option">
-                                                        <a href="single-product.html">
+                                                        <a href="#" onclick="return false;" (click)="addCart(best_product)">
                                                             Add to Cart
                                                         </a>
                                                     </li>
@@ -328,17 +337,18 @@
                                             <div class="inner">
                                                 <div class="product-rating">
                                                     <span class="icon">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star" [ngClass]="{'start-del': best_product.avg_review < 1}"></i>
+                                                <i class="fas fa-star" [ngClass]="{'start-del': best_product.avg_review < 2}"></i>
+                                                <i class="fas fa-star" [ngClass]="{'start-del': best_product.avg_review < 3}"></i>
+                                                <i class="fas fa-star" [ngClass]="{'start-del': best_product.avg_review < 4}"></i>
+                                                <i class="fas fa-star" [ngClass]="{'start-del': best_product.avg_review < 5}"></i>
                                             </span>
-                                                    <span class="rating-number">(64)</span>
+                                            
+                                                    <span class="rating-number">({{ best_product.count_review }})</span>
                                                 </div>
-                                                <h5 class="title"><a href="single-product.html">{{ best_product.title }}</a></h5>
+                                                <h5 class="title"><a [routerLink]="[ '/landing-producto/', best_product.slug ]">{{ best_product.title }}</a></h5>
                                                 <div class="product-price-variant">
-                                                    <span class="price current-price">{{ best_product.price_pesos }} PEN</span>
+                                                    <span class="price current-price">{{ best_product.price_usd }} USD</span>
                                                     <!-- <span class="price old-price">$49.99</span> -->
                                                 </div>
                                             </div>
@@ -469,7 +479,7 @@
                         <div class="slick-single-layout">
                             <div class="axil-product product-style-two has-color-pick">
                                 <div class="thumbnail">
-                                    <a href="single-product.html">
+                                    <a [routerLink]="[ '/landing-producto/', best_product.slug ]">
                                         <img data-sal="fade" style="width: 255px;height: 255px;object-fit: cover;" data-sal-delay="100" data-sal-duration="1500" [src]="best_product.imagen" alt="Product Images">
                                     </a>
                                     <!-- <div class="label-block label-right">
@@ -488,16 +498,16 @@
                                                 </li>
                                             </ul>
                                         </div>
-                                        <h5 class="title"><a href="single-product.html">{{ best_product.title }}</a></h5>
+                                        <h5 class="title"><a [routerLink]="[ '/landing-producto/', best_product.slug ]">{{ best_product.title }}</a></h5>
                                         <div class="product-price-variant">
                                             <!-- <span class="price old-price">$50</span> -->
-                                            <span class="price current-price">{{ best_product.price_pesos }} PEN</span>
+                                            <span class="price current-price">{{ best_product.price_usd }} USD</span>
                                         </div>
                                     </div>
                                     <div class="product-hover-action">
                                         <ul class="cart-action justify-content-center">
                                             <li class="wishlist"><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
-                                            <li class="select-option"><a href="cart.html">Add to Cart</a></li>
+                                            <li class="select-option"><a href="#" onclick="return false;" (click)="addCart(best_product)">Add to Cart</a></li>
                                             <li class="quickview"><a href="#" data-bs-toggle="modal" data-bs-target="#quick-view-modal" (click)="OpenModal(best_product)"><i class="far fa-eye"></i></a></li>
                                         </ul>
                                     </div>
@@ -612,7 +622,7 @@
                                                             <div class="product-badget">{{ product_selected.FlashSale.discount }}% OFF</div>
                                                         </div>
                                                         <div class="label-block label-right" *ngIf="product_selected.FlashSale.type_discount == 2">
-                                                            <div class="product-badget">{{ product_selected.FlashSale.discount }}PEN OFF</div>
+                                                            <div class="product-badget">{{ product_selected.FlashSale.discount }}USD OFF</div>
                                                         </div>
                                                     </ng-container>
                                                     
@@ -653,9 +663,9 @@
                                             </div>
                                         </div>
                                         <h3 class="product-title">{{ product_selected.title }}</h3>
-                                        <span class="price-amount" *ngIf="!product_selected.FlashSale">{{ product_selected.price_pesos }} PEN</span>
-                                        <span class="price-amount" *ngIf="product_selected.FlashSale"> <del>{{ product_selected.price_pesos }} PEN</del> </span>
-                                        <span class="price-amount" *ngIf="product_selected.FlashSale"> {{ getCalNewPrice(product_selected) }} PEN</span>
+                                        <span class="price-amount" *ngIf="!product_selected.FlashSale">{{ product_selected.price_usd }} USD</span>
+                                        <span class="price-amount" *ngIf="product_selected.FlashSale"> <del>{{ product_selected.price_usd }} USD</del> </span>
+                                        <span class="price-amount" *ngIf="product_selected.FlashSale"> {{ getCalNewPrice(product_selected) }} USD</span>
                                         <ul class="product-meta">
                                             <li><i class="fal fa-check"></i>In stock</li>
                                             <li><i class="fal fa-check"></i>Free delivery available</li>
@@ -723,177 +733,3 @@
         </div>
     </div>
     <!-- Product Quick View Modal End -->
-
-    <!-- Header Search Modal End -->
-    <div class="header-search-modal" id="header-search-modal">
-        <button class="card-close sidebar-close"><i class="fas fa-times"></i></button>
-        <div class="header-search-wrap">
-            <div class="card-header">
-                <form action="#">
-                    <div class="input-group">
-                        <input type="search" class="form-control" name="prod-search" id="prod-search" placeholder="Write Something....">
-                        <button type="submit" class="axil-btn btn-bg-primary"><i class="far fa-search"></i></button>
-                    </div>
-                </form>
-            </div>
-            <div class="card-body">
-                <div class="search-result-header">
-                    <h6 class="title">24 Result Found</h6>
-                    <a href="shop.html" class="view-all">View All</a>
-                </div>
-                <div class="psearch-results">
-                    <div class="axil-product-list">
-                        <div class="thumbnail">
-                            <a href="single-product.html">
-                                <img src="./assets/images/product/electric/product-09.png" alt="Yantiti Leather Bags">
-                            </a>
-                        </div>
-                        <div class="product-content">
-                            <div class="product-rating">
-                                <span class="rating-icon">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fal fa-star"></i>
-                            </span>
-                                <span class="rating-number"><span>100+</span> Reviews</span>
-                            </div>
-                            <h6 class="product-title"><a href="single-product.html">Media Remote</a></h6>
-                            <div class="product-price-variant">
-                                <span class="price current-price">$29.99</span>
-                                <span class="price old-price">$49.99</span>
-                            </div>
-                            <div class="product-cart">
-                                <a href="cart.html" class="cart-btn"><i class="fal fa-shopping-cart"></i></a>
-                                <a href="wishlist.html" class="cart-btn"><i class="fal fa-heart"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="axil-product-list">
-                        <div class="thumbnail">
-                            <a href="single-product.html">
-                                <img src="./assets/images/product/electric/product-09.png" alt="Yantiti Leather Bags">
-                            </a>
-                        </div>
-                        <div class="product-content">
-                            <div class="product-rating">
-                                <span class="rating-icon">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fal fa-star"></i>
-                            </span>
-                                <span class="rating-number"><span>100+</span> Reviews</span>
-                            </div>
-                            <h6 class="product-title"><a href="single-product.html">Media Remote</a></h6>
-                            <div class="product-price-variant">
-                                <span class="price current-price">$29.99</span>
-                                <span class="price old-price">$49.99</span>
-                            </div>
-                            <div class="product-cart">
-                                <a href="cart.html" class="cart-btn"><i class="fal fa-shopping-cart"></i></a>
-                                <a href="wishlist.html" class="cart-btn"><i class="fal fa-heart"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Header Search Modal End -->
-
-
-
-    <div class="cart-dropdown" id="cart-dropdown">
-        <div class="cart-content-wrap">
-            <div class="cart-header">
-                <h2 class="header-title">Cart review</h2>
-                <button class="cart-close sidebar-close"><i class="fas fa-times"></i></button>
-            </div>
-            <div class="cart-body">
-                <ul class="cart-item-list">
-                    <li class="cart-item">
-                        <div class="item-img">
-                            <a href="single-product.html"><img src="assets/images/product/electric/product-01.png" alt="Commodo Blown Lamp"></a>
-                            <button class="close-btn"><i class="fas fa-times"></i></button>
-                        </div>
-                        <div class="item-content">
-                            <div class="product-rating">
-                                <span class="icon">
-								<i class="fas fa-star"></i>
-								<i class="fas fa-star"></i>
-								<i class="fas fa-star"></i>
-								<i class="fas fa-star"></i>
-								<i class="fas fa-star"></i>
-							</span>
-                                <span class="rating-number">(64)</span>
-                            </div>
-                            <h3 class="item-title"><a href="single-product-3.html">Wireless PS Handler</a></h3>
-                            <div class="item-price"><span class="currency-symbol">$</span>155.00</div>
-                            <div class="pro-qty item-quantity">
-                                <input type="number" class="quantity-input" value="15">
-                            </div>
-                        </div>
-                    </li>
-                    <li class="cart-item">
-                        <div class="item-img">
-                            <a href="single-product-2.html"><img src="assets/images/product/electric/product-02.png" alt="Commodo Blown Lamp"></a>
-                            <button class="close-btn"><i class="fas fa-times"></i></button>
-                        </div>
-                        <div class="item-content">
-                            <div class="product-rating">
-                                <span class="icon">
-								<i class="fas fa-star"></i>
-								<i class="fas fa-star"></i>
-								<i class="fas fa-star"></i>
-								<i class="fas fa-star"></i>
-								<i class="fas fa-star"></i>
-							</span>
-                                <span class="rating-number">(4)</span>
-                            </div>
-                            <h3 class="item-title"><a href="single-product-2.html">Gradient Light Keyboard</a></h3>
-                            <div class="item-price"><span class="currency-symbol">$</span>255.00</div>
-                            <div class="pro-qty item-quantity">
-                                <input type="number" class="quantity-input" value="5">
-                            </div>
-                        </div>
-                    </li>
-                    <li class="cart-item">
-                        <div class="item-img">
-                            <a href="single-product-3.html"><img src="assets/images/product/electric/product-03.png" alt="Commodo Blown Lamp"></a>
-                            <button class="close-btn"><i class="fas fa-times"></i></button>
-                        </div>
-                        <div class="item-content">
-                            <div class="product-rating">
-                                <span class="icon">
-								<i class="fas fa-star"></i>
-								<i class="fas fa-star"></i>
-								<i class="fas fa-star"></i>
-								<i class="fas fa-star"></i>
-								<i class="fas fa-star"></i>
-							</span>
-                                <span class="rating-number">(6)</span>
-                            </div>
-                            <h3 class="item-title"><a href="single-product.html">HD CC Camera</a></h3>
-                            <div class="item-price"><span class="currency-symbol">$</span>200.00</div>
-                            <div class="pro-qty item-quantity">
-                                <input type="number" class="quantity-input" value="100">
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="cart-footer">
-                <h3 class="cart-subtotal">
-                    <span class="subtotal-title">Subtotal:</span>
-                    <span class="subtotal-amount">$610.00</span>
-                </h3>
-                <div class="group-btn">
-                    <a href="cart.html" class="axil-btn btn-bg-primary viewcart-btn">View Cart</a>
-                    <a href="checkout.html" class="axil-btn btn-bg-secondary checkout-btn">Checkout</a>
-                </div>
-            </div>
-        </div>
-    </div>

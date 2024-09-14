@@ -1,8 +1,8 @@
 export default {
-    product_list: (product,variedades = []) => {
+    product_list: (product,variedades = [],avg_review = 0,count_review = 0,CampaingDiscount = null) => {
         var IMAGEN_TWO = "";
         let GALERIAS = product.galerias.map((galeria) => {
-            galeria.imagen = 'http://localhost:3000'+'/api/products/uploads/product/'+galeria.imagen;//*
+            galeria.imagen = process.env.URL_BACKEND+'/api/products/uploads/product/'+galeria.imagen;//*
             return galeria;
         });
         var VAL = Math.floor(Math.random() * 3);//0,1,2
@@ -12,7 +12,7 @@ export default {
             title: product.title,
             sku: product.sku,
             slug: product.slug,
-            imagen: 'http://localhost:3000'+'/api/products/uploads/product/'+product.portada,//*
+            imagen: process.env.URL_BACKEND+'/api/products/uploads/product/'+product.portada,//*
             categorie: product.categorie,
             price_pesos: product.price_pesos,
             price_usd: product.price_usd,
@@ -25,6 +25,9 @@ export default {
             variedades: variedades,
             imagen_two: IMAGEN_TWO,
             galerias:GALERIAS,
+            avg_review: avg_review,
+            count_review: count_review,
+            campaing_discount: CampaingDiscount,
         }
     }
 }

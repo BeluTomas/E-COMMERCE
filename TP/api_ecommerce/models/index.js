@@ -5,6 +5,15 @@ import Variedad from './Variedad'
 import Slider from './Slider'
 import Cupone from './Cupone'
 import Discount from './Discount'
+import Cart from './Cart'
+import AddressClient from './AddressClient'
+
+import Sale from './Sale'
+import SaleDetail from './SaleDetail'
+import SaleAddress from './SaleAddress'
+
+import Review from './Review'
+
 export default {
     User,
     Categorie,
@@ -12,5 +21,11 @@ export default {
     Variedad,
     Slider,
     Cupone,
-    Discount
+    Discount,
+    Cart,
+    AddressClient,
+    Sale,
+    SaleDetail,
+    SaleAddress,
+    Review,
 }

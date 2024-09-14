@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../_services/auth.service';
 
+declare function alertDanger([]):any;
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -27,20 +28,21 @@ export class LoginComponent implements OnInit {
   login(){
 
     if(!this.email){
-      alert("ES NECESARIO INGRESAR EL EMAIL");
+      alertDanger("ES NECESARIO INGRESAR EL EMAIL");
     }
 
     if(!this.password){
-      alert("ES NECESARIO INGRESAR UNA CONTRASEÑA");
+      alertDanger("ES NECESARIO INGRESAR UNA CONTRASEÑA");
     }
 
     this.authService.login(this.email,this.password).subscribe((resp:any) => {
       console.log(resp);
       if(!resp.error && resp){
         // QUE EL USUARIO INGRESO CON EXITO
-        this.router.navigate(["/"]);
+        // this.router.navigate(["/"]);
+        location.reload();
       }else{
-        alert(resp.error.message);
+        alertDanger(resp.error.message);
       }
     })
   }

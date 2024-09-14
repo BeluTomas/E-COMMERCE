@@ -3,7 +3,8 @@ import cors from 'cors'
 import path from 'path'
 import mongoose from 'mongoose'
 import router from './router'
-
+import * as dotenv from 'dotenv' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
+dotenv.config()
 //CONEXION A LA BASE DE DATOS
 
 mongoose.Promise = global.Promise;
