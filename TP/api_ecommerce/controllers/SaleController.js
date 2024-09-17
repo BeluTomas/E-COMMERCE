@@ -27,20 +27,25 @@ async function send_email(sale_id) {
             service: 'gmail',
             host: 'smtp.gmail.com',
             auth: {
-            user: 'demo@gmail.com',
+            user: 'echodeveloper960@gmail.com',
                 pass: 'bilcfvchcrscbseu'
             }
         }));
 
         readHTMLFile(process.cwd() + '/mails/email_sale.html', (err, html)=>{
-                                
+                            
+            OrderDetail.map((detail) => {
+                detail.product.imgs = process.env.URL_BACKEND+'/api/products/uploads/product/'+detail.product.portada;
+                return detail;
+            });
+
             let rest_html = ejs.render(html, {order: Order,address_sale: AddressSale,order_detail: OrderDetail});
     
             var template = handlebars.compile(rest_html);
             var htmlToSend = template({op:true});
     
             var mailOptions = {
-                from: 'demo@gmail.com',
+                from: 'echodeveloper960@gmail.com',
                 to: Order.user.email,
                 subject: 'Finaliza tu compra ' + Order._id,
                 html: htmlToSend
