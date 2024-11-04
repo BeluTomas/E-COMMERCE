@@ -96,6 +96,7 @@ export default {
                 products: products,
             })
         } catch (error) {
+            console.log(error);
             res.status(500).send({
                 message: "COURRIO UN PROBLEMA"
             });
@@ -166,7 +167,7 @@ export default {
                 }
             })
             res.status(200).json({
-                message: "LA IMAGEN SE SUBIO PERFECTAMENTE",
+                message: "LA IMAGEN SE SUBIO CORRECTAMENTE",
                 imagen: {
                     imagen: process.env.URL_BACKEND+'/api/products/uploads/product/'+imagen_name,
                     _id: req.body.__id

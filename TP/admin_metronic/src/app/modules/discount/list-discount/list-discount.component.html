@@ -57,11 +57,11 @@
                         <tr *ngFor="let discount of discounts">
                           <td>{{ discount.type_campaign == 1 ? 'CAMAPAÑA NORMAL' : 'VENTA FLASH' }}</td>
                           <td>{{ discount.type_segment == 1 ? 'PRODUCTO' : 'CATEGORIAS' }}</td>
-                          <td>{{ discount.discount + (discount.type_discount == 1 ? "%" : "PEN") }}</td>
+                          <td>{{ discount.discount + (discount.type_discount == 1 ? "%" : " ARG") }}</td>
                           <td>{{ getParseDate(discount.start_date) + ' / '+  getParseDate(discount.end_date) }}</td>
                           <td>
                             <span class="label label-success label-pill label-inline mr-2" *ngIf="discount.state == 1">Activo</span>
-                            <span class="label label-danger label-pill label-inline mr-2" *ngIf="discount.state == 2">Des Activo</span>
+                            <span class="label label-danger label-pill label-inline mr-2" *ngIf="discount.state == 2">Desactivo</span>
                         </td>
                           <td>
                             <a (click)="editDiscount(discount)" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-1" ngbTooltip="Editar Descuento" ngbTooltipClass="kt-tooltip">

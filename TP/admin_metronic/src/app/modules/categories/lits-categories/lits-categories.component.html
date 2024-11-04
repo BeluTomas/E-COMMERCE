@@ -58,7 +58,7 @@
                       <td>{{ categorie.title }}</td>
                       <td>
                         <span class="label label-success label-pill label-inline mr-2" *ngIf="categorie.state == 1">Activo</span>
-                        <span class="label label-danger label-pill label-inline mr-2" *ngIf="categorie.state == 2">Des Activo</span>
+                        <span class="label label-danger label-pill label-inline mr-2" *ngIf="categorie.state == 2">Desactivo</span>
                     </td>
                       <td>
                         <a (click)="editCategorie(categorie)" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-1" ngbTooltip="Editar Categoria" ngbTooltipClass="kt-tooltip">
