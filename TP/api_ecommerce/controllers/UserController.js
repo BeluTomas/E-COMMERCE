@@ -59,6 +59,7 @@ export default {
                     const USER_FRONTED = {
                         token:tokenT,
                         user: {
+                            _id: user._id,
                             name: user.name,
                             email: user.email,
                             surname: user.surname,
@@ -98,6 +99,7 @@ export default {
                     const USER_FRONTED = {
                         token:tokenT,
                         user: {
+                            _id: user._id,
                             name: user.name,
                             email: user.email,
                             surname: user.surname,
@@ -134,8 +136,8 @@ export default {
                 var avatar_name = name[2];
                 console.log(avatar_name)
             }
-            if(req.body.password){
-                req.body.password = await bcrypt.hash(req.body.password,10);
+            if(req.body.repet_password){
+                req.body.password = await bcrypt.hash(req.body.repet_password,10);
             }
             await models.User.findByIdAndUpdate({_id: req.body._id},req.body);
 

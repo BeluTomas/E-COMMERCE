@@ -32,8 +32,8 @@ async function send_email(sale_id) {
             service: 'gmail',
             host: 'smtp.gmail.com',
             auth: {
-                user: 'echodeveloper960@gmail.com',
-                pass: 'bilcfvchcrscbseu' // Nota: No se recomienda incluir contraseñas en el código.
+                user: 'belutomas2003@gmail.com',
+                pass: 'nrrvkifxijeptxpw' // Nota: No se recomienda incluir contraseñas en el código.
             }
         }));
 
@@ -53,7 +53,7 @@ async function send_email(sale_id) {
     
             // Configura las opciones del correo.
             var mailOptions = {
-                from: 'echodeveloper960@gmail.com',
+                from: 'belutomas2003@gmail.com',
                 to: Order.user.email, // Dirección de correo del usuario.
                 subject: 'Finaliza tu compra ' + Order._id, // Asunto del correo.
                 html: htmlToSend // Contenido del correo en HTML.

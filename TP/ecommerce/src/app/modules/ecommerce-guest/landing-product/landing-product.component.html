@@ -87,7 +87,7 @@
                                         <h6 class="title">Tamaños:</h6>
                                         <ul class="range-variant">
                                             <ng-container *ngFor="let variedad of product_selected.variedades">
-                                                <li (click)="selectedVariedad(variedad)">{{ variedad.valor }}</li>
+                                                <li (click)="selectedVariedad(variedad)" [ngClass]="{'range-variant-border': (variedad_selected && variedad_selected._id == variedad._id)}"> {{ variedad.valor }}</li>
                                             </ng-container>
                                         </ul>
                                     </div>

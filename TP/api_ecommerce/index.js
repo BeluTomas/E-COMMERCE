@@ -11,7 +11,7 @@ dotenv.config();
 mongoose.set('strictQuery', true); // Solución al DeprecationWarning de Mongoose
 mongoose.Promise = global.Promise;
 
-const dbUrL = "mongodb://127.0.0.1:27017/ecommerce";
+const dbUrL = "mongodb://127.0.0.1:27017/ecommerce_udemy";
 
 mongoose.connect(dbUrL, {
     useNewUrlParser: true,

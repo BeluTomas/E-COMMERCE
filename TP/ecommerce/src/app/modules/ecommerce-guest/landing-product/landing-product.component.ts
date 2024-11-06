@@ -36,6 +36,7 @@ export class LandingProductComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log(this.ecommerce_guest._authService.user);
     this.routerActived.params.subscribe((resp:any) => {
       this.slug = resp["slug"];
     })

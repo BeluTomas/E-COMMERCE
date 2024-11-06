@@ -196,9 +196,9 @@ function HOMEINITTEMPLATE($, undefined) {
 
       headerIconToggle: function() {
 
-          $('.my-account > a').on('click', function(e) {
-              $(this).toggleClass('open').siblings().toggleClass('open');
-          })
+         // $('.my-account > a').on('click', function(e) {
+         //     $(this).toggleClass('open').siblings().toggleClass('open');
+         // })
       },
 
       priceRangeSlider: function(e) {
@@ -991,7 +991,11 @@ function HOMEINITTEMPLATE($, undefined) {
   axilInit.i();
 
 }
-
+function headerIconToggle() {
+    $('.my-account > a').on('click', function(e) {
+        $(this).toggleClass('open').siblings().toggleClass('open');
+    })
+}
 
 function ModalProductDetail(){
     $('.product-large-thumbnail').slick({

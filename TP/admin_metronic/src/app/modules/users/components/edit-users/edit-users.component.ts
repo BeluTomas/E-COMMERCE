@@ -46,7 +46,7 @@ export class EditUsersComponent implements OnInit {
       name: this.name,
       surname: this.surname,
       email: this.email,
-      password: this.password,
+      // password: this.password,
       repet_password: this.repet_password,
     }
     this.userService.updateUser(data).subscribe((resp:any) => {
