@@ -20,7 +20,7 @@
                           <button type="submit" class="icon wooc-btn-search">
                               <i class="far fa-search"></i>
                           </button>
-                          <input type="search" class="placeholder product-search-input" name="search2" id="search2" value="" maxlength="128" placeholder="What are you looking for...." autocomplete="off">
+                          <input type="search" class="placeholder product-search-input" name="search2" id="search2" value="" maxlength="128" placeholder="Qué estás buscando?" autocomplete="off">
                       </div>
                       <div class="dropdown">
                           <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -387,10 +387,10 @@
                           </a>
                           <small *ngIf="user">{{ user.name }}</small> 
                           <div class="my-account-dropdown">
-                              <span class="title">QUICKLINKS</span>
+                              <span class="title">Links rapidos</span>
                               <ul>
                                   <li>
-                                      <a routerLink="/perfil-del-cliente">My Account</a>
+                                      <a routerLink="/perfil-del-cliente">Mi cuenta</a>
                                   </li>
                                   <li>
                                       <a href="#">Initiate return</a>
@@ -402,8 +402,8 @@
                                       <a href="#">Language</a>
                                   </li>
                               </ul>
-                              <a [routerLink]="[ '/auth/login' ]" class="axil-btn btn-bg-primary" *ngIf="!user">Login</a>
-                              <a href="#" onclick="return false;" (click)="logout()" class="axil-btn btn-bg-primary" *ngIf="user">Logout</a>
+                              <a [routerLink]="[ '/auth/login' ]" class="axil-btn btn-bg-primary" *ngIf="!user">Iniciar sesión</a>
+                              <a href="#" onclick="return false;" (click)="logout()" class="axil-btn btn-bg-primary" *ngIf="user">Cerrar sesión</a>
                               
                           </div>
                       </li>
@@ -428,15 +428,15 @@
             <div class="card-header">
                 <form action="#">
                     <div class="input-group">
-                        <input type="search" class="form-control" [(ngModel)]="search_product" (keyup.enter)="searchProduct()" name="prod-search" id="prod-search" #filter placeholder="Write Something....">
+                        <input type="search" class="form-control" [(ngModel)]="search_product" (keyup.enter)="searchProduct()" name="prod-search" id="prod-search" #filter placeholder="Escribe algo">
                         <button type="submit" class="axil-btn btn-bg-primary"><i class="far fa-search"></i></button>
                     </div>
                 </form>
             </div>
             <div class="card-body">
                 <div class="search-result-header">
-                    <h6 class="title">{{ products_search.length }} Result Found</h6>
-                    <a routerLink="/filtro-de-productos" class="view-all">View All</a>
+                    <h6 class="title">{{ products_search.length }} Resultados encontrados</h6>
+                    <a routerLink="/filtro-de-productos" class="view-all">Ver Todo</a>
                 </div>
                 <div class="psearch-results">
                     <ng-container *ngFor="let product of products_search">
@@ -455,7 +455,7 @@
                                     <i class="fas fa-star" [ngClass]="{'start-del': product.avg_review < 4}"></i>
                                     <i class="fas fa-star" [ngClass]="{'start-del': product.avg_review < 5}"></i>
                                 </span>
-                                    <span class="rating-number"><span>{{ product.count_review }}+</span> Reviews</span>
+                                    <span class="rating-number"><span>{{ product.count_review }}+</span> Reseñas</span>
                                 </div>
                                 <h6 class="product-title"><a [routerLink]="[ '/landing-producto/', product.slug ]" [queryParams]="getRouterDiscount(product)">{{ product.title }}</a></h6>
                                 <div class="product-price-variant">
@@ -482,7 +482,7 @@
     <div class="cart-dropdown" id="cart-dropdown">
         <div class="cart-content-wrap">
             <div class="cart-header">
-                <h2 class="header-title">Cart review</h2>
+                <h2 class="header-title">Carrito de compra:</h2>
                 <button class="cart-close sidebar-close"><i class="fas fa-times"></i></button>
             </div>
             <div class="cart-body">
@@ -522,8 +522,8 @@
                     <span class="subtotal-amount">{{ totalCarts }} USD</span>
                 </h3>
                 <div class="group-btn">
-                    <a routerLink="/lista-de-carritos" class="axil-btn btn-bg-primary viewcart-btn">View Cart</a>
-                    <a routerLink="/proceso-de-pago" class="axil-btn btn-bg-secondary checkout-btn">Checkout</a>
+                    <a routerLink="/lista-de-carritos" class="axil-btn btn-bg-primary viewcart-btn">Ver carrito</a>
+                    <a routerLink="/proceso-de-pago" class="axil-btn btn-bg-secondary checkout-btn">Comprar</a>
                 </div>
             </div>
         </div>
