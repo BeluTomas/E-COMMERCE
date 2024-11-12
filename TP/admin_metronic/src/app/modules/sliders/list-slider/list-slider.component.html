@@ -46,7 +46,7 @@
                     <tr class="text-left">
                         <th >IMAGEN </th>
                         <th >TITULO</th>
-                        <th >STATUS</th>
+                        <th >ESTADO</th>
                         <th >ACCIÓN</th>
                     </tr>
                 </thead>
@@ -58,7 +58,7 @@
                       <td>{{ slider.title }}</td>
                       <td>
                         <span class="label label-success label-pill label-inline mr-2" *ngIf="slider.state == 1">Activo</span>
-                        <span class="label label-danger label-pill label-inline mr-2" *ngIf="slider.state == 2"></span>
+                        <span class="label label-danger label-pill label-inline mr-2" *ngIf="slider.state == 2">Desactivo</span>
                     </td>
                       <td>
                         <a (click)="editSlider(slider)" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-1" ngbTooltip="Editar Slider" ngbTooltipClass="kt-tooltip">
